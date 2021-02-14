@@ -46,13 +46,13 @@ DerivedData/
 
 ### Xcode Patch ###
 ### プロジェクトファイルのパッケージ（ディレクトリ）の全体を除外し、必要なものだけ追加（除外からの除外）をしていきます
-*.xcodeproj/*
+###  *.xcodeproj/*
 ### プロジェクトの構成情報を格納するファイル
-!*.xcodeproj/project.pbxproj
+### !*.xcodeproj/project.pbxproj
 ### XcodeのプロジェクトのビルドSchemeを格納するファイル
-!*.xcodeproj/xcshareddata/
+### !*.xcodeproj/xcshareddata/
 ### プロジェクトのワークスペースのデータを格納するXMLファイル
-!*.xcworkspace/contents.xcworkspacedata
+### !*.xcworkspace/contents.xcworkspacedata
 
 ### 「File > Workspace Settings」で設定できるワークスペースの設定値。
 **/xcshareddata/WorkspaceSettings.xcsettings
