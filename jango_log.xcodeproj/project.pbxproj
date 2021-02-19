@@ -78,7 +78,6 @@
 			children = (
 				1996EB5D25D7E722008955D8 /* Controller */,
 				1996EB5C25D7E714008955D8 /* View */,
-				1996EB5B25D7E6FC008955D8 /* Model */,
 				1996EB4525D7E406008955D8 /* AppDelegate.swift */,
 				1996EB4725D7E406008955D8 /* SceneDelegate.swift */,
 				1996EB4E25D7E409008955D8 /* Assets.xcassets */,
@@ -86,13 +85,6 @@
 				1996EB5325D7E409008955D8 /* Info.plist */,
 			);
 			path = jango_log;
-			sourceTree = "<group>";
-		};
-		1996EB5B25D7E6FC008955D8 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		1996EB5C25D7E714008955D8 /* View */ = {
