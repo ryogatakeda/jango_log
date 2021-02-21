@@ -6,9 +6,60 @@
 //各カテゴリの収支をリスト表示する
 
 import UIKit
+class ShopCollectionViewCell: UICollectionViewCell {
+    var imageView: UIImageView!
+    var textLabel: UILabel!
 
-class StatsView: UIViewController ,UITableViewDelegate, UITableViewDataSource{
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+}
 
+class ShopTableViewCell: UITableViewCell {
+
+    @IBOutlet weak var shopCollectionView: UICollectionView!
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // カスタムセルの登録
+        let nib = UINib(nibName: "ShopCollectionViewCell", bundle: nil)
+        shopCollectionView.register(nib, forCellWithReuseIdentifier: "ShopCollectionViewCell2")
+    }
+
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+    }
+
+    func setCollectionViewDataSourceDelegate
+        <D: UICollectionViewDataSource & UICollectionViewDelegate>
+        (dataSourceDelegate: D, forRow row: Int) {
+
+        shopCollectionView.delegate = dataSourceDelegate
+        shopCollectionView.dataSource = dataSourceDelegate
+        shopCollectionView.tag = row
+        shopCollectionView.reloadData()
+    }
+}
+
+class StatsView: UIViewController , UITableViewDelegate , UITableViewDataSource , UICollectionViewDelegateFlowLayout , UICollectionViewDelegate , UICollectionViewDataSource{
+    var categori1 = [["name" : "サクラキ",
+                     "imageName" : "sl3.jpg"],
+                    ["name" : "サクラキ",
+                     "imageName" : "sl3.jpg"],
+                    ["name" : "サクラキ",
+                     "imageName" : "sl3.jpg"]]
+    var categori2 = [["name" : "散歩",
+                      "imageName" : "sl4.jpg"],
+                     ["name" : "散歩",
+                      "imageName" : "sl4.jpg"],
+                     ["name" : "散歩",
+                      "imageName" : "sl4.jpg"]]
+    var categori3 = [["name" : "散歩後",
+                      "imageName" : "sl5.jpg"],
+                     ["name" : "散歩後",
+                      "imageName" : "sl5.jpg"],
+                     ["name" : "散歩後",
+                      "imageName" : "sl5.jpg"]]
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black
@@ -18,17 +69,47 @@ class StatsView: UIViewController ,UITableViewDelegate, UITableViewDataSource{
               .flexibleWidth,
               .flexibleHeight
             ]
-                 tableView.delegate = self
-                tableView.dataSource = self
-
+            tableView.delegate = self
+            tableView.dataSource = self
+            ////tableViewの使わないセルの区切り線を消す
+            tableView.tableFooterView = UIView()
+            //tableViewの高さ指定
+            tableView.rowHeight = 200
             self.view.addSubview(tableView)
 
             return tableView
+            
+        }()
+    }
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+            return 3
+        }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+            return CGSize(width: 240, height: 180)
+        }
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ShopCollectionViewCell2", for: indexPath) as! ShopCollectionViewCell
 
-          }()  }
-   
+                switch (collectionView.tag) {
+                case 0:
+                    cell.imageView.image = UIImage(named: categori1[indexPath.row]["imageName"]!)
+                    cell.textLabel.text = categori1[indexPath.row]["name"]
+
+                case 1:
+                    cell.imageView.image = UIImage(named: categori2[indexPath.row]["imageName"]!)
+                    cell.textLabel.text = categori2[indexPath.row]["name"]
+
+                case 2:
+                    cell.imageView.image = UIImage(named: categori3[indexPath.row]["imageName"]!)
+                    cell.textLabel.text = categori3[indexPath.row]["name"]
+
+                default:
+                    print("section error")
+                }
+        return cell
+    }
     var tableView: UITableView?
-      let items = ["Apple","Banana","Orange"]
+    let items = ["麻雀ランド39","本走","東風","3麻"]
     func numberOfSections(in tableView: UITableView) -> Int {
       return 1
     }
@@ -38,7 +119,7 @@ class StatsView: UIViewController ,UITableViewDelegate, UITableViewDataSource{
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
       let cell = tableView.dequeueReusableCell(withIdentifier: "Cell")
-      ?? UITableViewCell(style: .default, reuseIdentifier: "Cell")
+        ?? UITableViewCell(style: .default, reuseIdentifier: "Cell")
 
       cell.textLabel?.text = self.items[indexPath.row]
 
@@ -46,7 +127,7 @@ class StatsView: UIViewController ,UITableViewDelegate, UITableViewDataSource{
 
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-      print("Selected! \(self.items[indexPath.row])")
+        print("Selected! \(self.items[indexPath.row])")
     }
 }
 
