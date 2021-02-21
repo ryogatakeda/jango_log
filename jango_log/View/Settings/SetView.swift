@@ -11,6 +11,9 @@ class SetView: UIViewController,UITableViewDelegate,UITableViewDataSource {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //ナビゲーションバーの表示
+//        navigationController?.navigationBar.isHidden = false
+//        title = "あいおうえ"
         
         //おまじない
         self.tableView = {
@@ -91,4 +94,10 @@ class SetView: UIViewController,UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
             return 80
         }
+    
+    //セルタップ時の操作
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = SetCategoryView.init()
+        present(vc, animated: true, completion: nil)
+    }
 }

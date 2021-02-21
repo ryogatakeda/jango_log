@@ -34,9 +34,13 @@ class UnderTabBarController: UITabBarController {
         //設定画面を配置
         let setView = SetView()
         setView.tabBarItem = UITabBarItem(tabBarSystemItem: .contacts, tag: 3)
+        //ナビゲーションバーのやつ
+        let setVC = UINavigationController(rootViewController: setView)
+        setView.title = "しごやめ"
+        
         
         //まとめておく
-        setViewControllers([homeView,calView,statsView,setView], animated: false)
+        setViewControllers([homeView,calView,statsView,setVC], animated: false)
     }
 }
 
