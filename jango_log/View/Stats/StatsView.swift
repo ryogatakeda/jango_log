@@ -14,10 +14,9 @@ class ShopCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
     }
 }
-
 class ShopTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var shopCollectionView: UICollectionView!
+     var shopCollectionView: UICollectionView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -40,6 +39,7 @@ class ShopTableViewCell: UITableViewCell {
         shopCollectionView.reloadData()
     }
 }
+
 
 class StatsView: UIViewController , UITableViewDelegate , UITableViewDataSource , UICollectionViewDelegateFlowLayout , UICollectionViewDelegate , UICollectionViewDataSource{
     var categori1 = [["name" : "サクラキ",
@@ -75,12 +75,14 @@ class StatsView: UIViewController , UITableViewDelegate , UITableViewDataSource 
             tableView.tableFooterView = UIView()
             //tableViewの高さ指定
             tableView.rowHeight = 200
+            tableView.register(ShopTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(ShopTableViewCell.self))
             self.view.addSubview(tableView)
 
             return tableView
             
         }()
     }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
             return 3
         }
@@ -109,25 +111,30 @@ class StatsView: UIViewController , UITableViewDelegate , UITableViewDataSource 
         return cell
     }
     var tableView: UITableView?
-    let items = ["麻雀ランド39","本走","東風","3麻"]
+    //セクション数
     func numberOfSections(in tableView: UITableView) -> Int {
-      return 1
+      return 3
     }
      
+    //セクション内のセル数
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-      return self.items.count
+      return 1
     }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-      let cell = tableView.dequeueReusableCell(withIdentifier: "Cell")
-        ?? UITableViewCell(style: .default, reuseIdentifier: "Cell")
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+            guard let cell = cell as? ShopTableViewCell else { return }
 
-      cell.textLabel?.text = self.items[indexPath.row]
+            //ShopTableViewCell.swiftで設定したメソッドを呼び出す(indexPath.section)
+            cell.setCollectionViewDataSourceDelegate(dataSourceDelegate: self, forRow: indexPath.section)
+        }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ShopTableViewCell2", for: indexPath) as! ShopTableViewCell
 
-      return cell
-
-    }
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("Selected! \(self.items[indexPath.row])")
-    }
+            //ShopTableViewCell.swiftで設定したメソッドを呼び出す(indexPath.row)
+            cell.setCollectionViewDataSourceDelegate(dataSourceDelegate: self, forRow: indexPath.row)
+            cell.shopCollectionView.reloadData()
+            return cell
+        }
+    
 }
 
