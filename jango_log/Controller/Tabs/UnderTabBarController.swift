@@ -21,26 +21,34 @@ class UnderTabBarController: UITabBarController {
         //ホーム画面を配置
         let homeView = HomeView()
         homeView.tabBarItem = UITabBarItem(tabBarSystemItem: .featured, tag: 0)
-        //上バーを配置
+        //ナビゲーションバーの設定
+        let homeVC = UINavigationController(rootViewController: homeView)
+        homeView.title = "ホーム"
         
         //カレンダー画面を配置
         let calView = CalendarView()
         calView.tabBarItem = UITabBarItem(tabBarSystemItem: .history, tag: 1)
+        //ナビゲーションバーの設定
+        let calVC = UINavigationController(rootViewController: calView)
+        calView.title = "カレンダー"
         
-        //収支画面を配置
+        //分析画面を配置
         let statsView = StatsView()
         statsView.tabBarItem = UITabBarItem(tabBarSystemItem: .more, tag: 2)
+        //ナビゲーションバーの設定
+        let statsVC = UINavigationController(rootViewController: statsView)
+        statsView.title = "分析"
         
         //設定画面を配置
         let setView = SetView()
         setView.tabBarItem = UITabBarItem(tabBarSystemItem: .contacts, tag: 3)
-        //ナビゲーションバーのやつ
+        //ナビゲーションバーの設定
         let setVC = UINavigationController(rootViewController: setView)
-        setView.title = "しごやめ"
+        setView.title = "設定"
         
         
         //まとめておく
-        setViewControllers([homeView,calView,statsView,setVC], animated: false)
+        setViewControllers([homeVC,calVC,statsVC,setVC], animated: false)
     }
 }
 

@@ -97,7 +97,9 @@ class SetView: UIViewController,UITableViewDelegate,UITableViewDataSource {
     
     //セルタップ時の操作
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = SetCategoryView.init()
-        present(vc, animated: true, completion: nil)
+
+        //カテゴリ設定画面へ遷移
+        let setCVC = SetCategoryView.init()
+        self.navigationController?.pushViewController(setCVC, animated:true )
     }
 }
