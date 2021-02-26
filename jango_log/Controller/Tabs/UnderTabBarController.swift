@@ -12,6 +12,16 @@ class UnderTabBarController: UITabBarController {
     //画面ロード
     override func viewDidLoad() {
         super.viewDidLoad()
+        //ナビゲーションバーの色
+        UINavigationBar.appearance().barTintColor = .blue
+        UINavigationBar.appearance().tintColor = .white
+        UINavigationBar.appearance().titleTextAttributes = [
+            // 文字の色
+                .foregroundColor: UIColor.white
+            ]
+        // タブバーの色
+        UITabBar.appearance().tintColor = .white
+        UITabBar.appearance().barTintColor = .blue
         
         initTabBar()
     }

@@ -11,9 +11,6 @@ class SetView: UIViewController,UITableViewDelegate,UITableViewDataSource {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //ナビゲーションバーの表示
-//        navigationController?.navigationBar.isHidden = false
-//        title = "あいおうえ"
         
         //おまじない
         self.tableView = {
