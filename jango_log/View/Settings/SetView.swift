@@ -96,7 +96,7 @@ class SetView: UIViewController,UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         //カテゴリ設定画面へ遷移
-        let setCVC = SetCategoryView.init()
+        let setCVC = SetHomeView.init()
         self.navigationController?.pushViewController(setCVC, animated:true )
     }
 }
