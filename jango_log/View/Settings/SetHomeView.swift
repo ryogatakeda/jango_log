@@ -17,10 +17,10 @@ class SetHomeView: UIViewController,UITableViewDelegate,UITableViewDataSource {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .systemGray
         
         //スクリーンの情報取得
         let screenWidth:CGFloat = self.view.frame.width
-        let screenHeight:CGFloat = self.view.frame.height
         // ナビゲーションバーの高さを取得
         let navigationController: UINavigationController = UINavigationController()
         let navigationBarHeight = navigationController.navigationBar.frame.size.height
